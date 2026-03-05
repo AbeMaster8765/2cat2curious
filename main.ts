@@ -18,6 +18,8 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`deathbox`, function (sprite, 
     game.gameOver(false)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Flower, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
     Bee = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -40,17 +42,30 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Flower, function (sprite, otherS
     Bee,
     assets.animation`Bee`,
     100,
-    false
+    true
     )
+    Bee.setPosition(hops_and_paws.x + 80, hops_and_paws.y - 80)
+    Bee.follow(hops_and_paws, 50)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`chest`, function (sprite, location) {
     game.setGameOverEffect(true, effects.confetti)
     game.gameOver(true)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    if (hops_and_paws.y < Bee.y) {
+        info.changeScoreBy(3)
+        music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
+    } else {
+        info.changeLifeBy(-1)
+        music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.UntilDone)
+    }
+})
 let Bee: Sprite = null
 let Flower: Sprite = null
 let Coin: Sprite = null
 let hops_and_paws: Sprite = null
+info.setLife(4)
 scene.setBackgroundColor(9)
 hops_and_paws = sprites.create(assets.image`cat`, SpriteKind.Player)
 controller.moveSprite(hops_and_paws, 100, 0)
