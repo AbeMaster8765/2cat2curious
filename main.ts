@@ -88,3 +88,14 @@ for (let value of tiles.getTilesByType(assets.tile`FlowerPLACEHOLDER`)) {
     tiles.placeOnTile(Flower, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
+game.onUpdate(function () {
+    hops_and_paws.setImage(assets.image`cat`)
+    if (hops_and_paws.vy < 0) {
+        hops_and_paws.setImage(assets.image`Cat Jumping`)
+    } else if (hops_and_paws.vy > 0) {
+        hops_and_paws.setImage(assets.image`Cat Falling`)
+    }
+    if (hops_and_paws.vx < 0) {
+        hops_and_paws.image.flipX()
+    }
+})
