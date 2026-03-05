@@ -1,5 +1,5 @@
 {
-    "name": "2cat2curious",
+    "name": "Hop's Platforms",
     "description": "",
     "dependencies": {
         "device": "*"
@@ -25,5 +25,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }
