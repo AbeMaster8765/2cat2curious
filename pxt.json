@@ -1,6 +1,6 @@
 {
     "name": "Hop's Platforms",
-    "description": "",
+    "description": "used a makecode tutorial",
     "dependencies": {
         "device": "*"
     },
